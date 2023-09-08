@@ -43,5 +43,12 @@ public class SupplierController extends HttpServlet {
 		System.out.println(request.getParameter("email"));
 		System.out.println(request.getParameter("comment"));
 		System.out.println(request.getParameter("cnpj"));
+
+		supplier.setName(request.getParameter("name"));
+		supplier.setEmail(request.getParameter("email"));
+		supplier.setComment(request.getParameter("comment"));
+		supplier.setCnpj(request.getParameter("cnpj"));
+		dao.insertSupplier(supplier);
+		response.sendRedirect("main");
 	}
 }

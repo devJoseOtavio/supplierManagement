@@ -9,7 +9,9 @@ import java.util.List;
 
 public class Dao {
 
-	private String url = "jdbc:mysql://127.0.0.1:3306/selective_process?useTimezone=true&serverTimezone=UTC";
+	private String driver = "com.mysql.cj.jdbc.Driver";
+	
+	private String url = "jdbc:mysql://localhost:3306/selective_process";
 
 	private String user = "root";
 
@@ -18,6 +20,7 @@ public class Dao {
 	private Connection connectionToHost() {
 		Connection con = null;
 		try {
+			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			return con;
 		} catch (Exception e) {
@@ -33,9 +36,10 @@ public class Dao {
 			Connection con = connectionToHost();
 			PreparedStatement pst = con.prepareStatement(create);
 			pst.setString(1, supplier.getName());
-			pst.setString(1, supplier.getEmail());
-			pst.setString(1, supplier.getComment());
-			pst.setString(1, supplier.getCnpj());
+			pst.setString(2, supplier.getEmail());
+			pst.setString(3, supplier.getComment());
+			pst.setString(4, supplier.getCnpj());
+			pst.executeUpdate();
 			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
