@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Cadastro de fornecedores</title>
+</head>
+<body>
+	<h1>Criar novo fornecedor</h1>
+	<form name="frmRegister" action="register">
+		<table class="tableForm">
+			<tr>
+				<td><input type="text" name="name" placeholder="Nome"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="email" placeholder="Email"
+					class="email"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="comment" placeholder="Comentário"></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="cnpj" placeholder="Cnpj"
+					class="cnpj"></td>
+			</tr>
+		</table>
+		<input type="button" value="Registrar" class="buttonSubmit" onclick="validate()">
+	</form>
+	<script src="scripts/validate.js"></script>
+</body>
+</html>

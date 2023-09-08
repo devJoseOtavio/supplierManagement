@@ -6,28 +6,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Dao;
+import model.Supplier;
 
-/**
- * Servlet implementation class Controller
- */
-@WebServlet(urlPatterns = {"/Controller", "/main"})
+@WebServlet(urlPatterns = { "/Controller", "/main", "/register" })
 public class SupplierController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SupplierController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	Dao dao = new Dao();
+	Supplier supplier = new Supplier();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public SupplierController() {
+		super();
 	}
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getServletPath();
+
+		if (action.equals("/main")) {
+			suppliers(request, response);
+		} else if (action.equals("/register")) {
+			newSupplier(request, response);
+		} else {
+			response.sendRedirect("index.html");
+		}
+	}
+
+	protected void suppliers(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect("supplier.jsp");
+	}
+
+	protected void newSupplier(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println(request.getParameter("name"));
+		System.out.println(request.getParameter("email"));
+		System.out.println(request.getParameter("comment"));
+		System.out.println(request.getParameter("cnpj"));
+	}
 }
