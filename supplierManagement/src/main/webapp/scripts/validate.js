@@ -37,7 +37,7 @@ function emailMask(field) {
 		alert("email valido");
 	}
 	else {
-		document.getElementById("msgemail").innerHTML = "<font color='red'>Email inválido </font>";
+		document.getElementById("email").innerHTML = "<font color='red'>Email inválido </font>";
 		alert("E-mail invalido");
 	}
 }
