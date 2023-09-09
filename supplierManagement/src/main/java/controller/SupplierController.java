@@ -32,10 +32,6 @@ public class SupplierController extends HttpServlet {
 		if (action.equals("/main")) {
 			supplierList(request, response);
 		} else if (action.equals("/register")) {
-			/*
-			 * boolean validate = validateParams(request, response); if (validate == false)
-			 * { return; }
-			 */
 			newSupplier(request, response);
 		} else if (action.equals("/edit")) {
 			editSupplier(request, response);

@@ -19,6 +19,10 @@ ArrayList<Supplier> supplierList = (ArrayList<Supplier>) request.getAttribute("f
 		<h1>Lista de Fornecedores</h1>
 		<a href="register.jsp" class="btn btn-primary mb-3">Novo
 			Fornecedor</a>
+
+		<%
+		if (supplierList != null && !supplierList.isEmpty()) {
+		%>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -52,6 +56,13 @@ ArrayList<Supplier> supplierList = (ArrayList<Supplier>) request.getAttribute("f
 				%>
 			</tbody>
 		</table>
+		<%
+		} else {
+		%>
+		<p>Não há fornecedores para exibir.</p>
+		<%
+		}
+		%>
 	</div>
 	</tbody>
 	</table>
