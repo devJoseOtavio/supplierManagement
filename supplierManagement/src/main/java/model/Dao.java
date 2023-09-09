@@ -46,9 +46,9 @@ public class Dao {
 		}
 	}
 
-	public List<Supplier> supplierList() {
-		List<Supplier> supplierList = new ArrayList<>();
-		String read = "select * from selective_process.supplier order by name";
+	public ArrayList<Supplier> supplierList() {
+		ArrayList<Supplier> supplierList = new ArrayList<>();
+		String read = "select * from selective_process.supplier order by id";
 
 		try {
 			Connection con = connectionToHost();
@@ -112,7 +112,7 @@ public class Dao {
 	}
 
 	public void deleteSupplier(Supplier supplier) {
-		String delete = "delete * from selective_process.supplier where id = ?";
+		String delete = "delete from selective_process.supplier where id = ?";
 
 		try {
 			Connection con = connectionToHost();
@@ -123,5 +123,31 @@ public class Dao {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+	
+	public boolean validateCnpj(String cnpj) {
+		String verifyIfCnpjExists = "select count(*) from selective_process.supplier where cnpj = ?";
+		
+		try {
+			Connection con = connectionToHost();
+			PreparedStatement pst = con.prepareStatement(verifyIfCnpjExists);
+			pst.setString(1, cnpj);
+			ResultSet resultSet = pst.executeQuery(); 
+			
+			if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                if (count > 0) {
+                    System.out.println("CPF já existe no banco de dados. Não é possível registrar o fornecedor.");
+                    return false;
+                } else {
+                    System.out.println("CPF não encontrado no banco de dados. Você pode registrar o fornecedor.");
+                    return true;
+                }
+            }
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 }
